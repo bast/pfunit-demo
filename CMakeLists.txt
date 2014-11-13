@@ -13,7 +13,7 @@ set(CMAKE_MODULE_PATH
 
 include(ConfigSafeGuards)
 
-set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -fprofile-arcs -ftest-coverage")
+set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -g -fprofile-arcs -ftest-coverage")
 
 add_library(demo-sources-to-test hello.F90)
 
