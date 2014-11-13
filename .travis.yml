@@ -7,7 +7,7 @@ install:
     # we do this because pfunit compilation fails with gfortran 4.6
   - sudo apt-add-repository --yes ppa:ubuntu-toolchain-r/test
   - sudo apt-get update
-  - sudo apt-get install gcc-4.9 gfortran-4.9 gcov-4.9
+  - sudo apt-get install gcc-4.9 gfortran-4.9 ggcov
   - sudo pip install cpp-coveralls
 script:
   - mkdir build
@@ -15,5 +15,6 @@ script:
   - cmake ..
   - make
   - ./pftest_alltests
+  - ls -l /usr/bin/gcov*
 after_success:
   - coveralls --root .. --extension .F90 -E ".*external.*" -E ".*CMakeFiles.*" -E ".*generated.*" -E ".*test_.*"
