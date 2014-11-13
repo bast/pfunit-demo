@@ -1,4 +1,5 @@
-language: fortran
+language: c
+compiler: gcc
 env:
     global:
         - FC=gfortran-4.8
