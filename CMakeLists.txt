@@ -14,6 +14,7 @@ set(CMAKE_MODULE_PATH
 include(ConfigSafeGuards)
 
 set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -g -fprofile-arcs -ftest-coverage")
+set(CMAKE_Fortran_LINK_FLAGS "-fprofile-arcs -ftest-coverage")
 
 add_library(demo-sources-to-test hello.F90)
 
@@ -65,6 +66,8 @@ foreach(_test
     set(_test_sources ${_test_sources} ${PROJECT_BINARY_DIR}/generated/${_test}.F90)
     file(APPEND ${PROJECT_BINARY_DIR}/generated/testSuites.inc "ADD_TEST_SUITE(${_test}_suite)\n")
 endforeach()
+
+set_source_files_properties(${PROJECT_SOURCE_DIR}/external/pfunit/include/driver.F90 PROPERTIES GENERATED 1)
 
 add_executable(
     pftest_alltests
