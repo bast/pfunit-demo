@@ -14,5 +14,5 @@ script:
   - cmake ..
   - make
   - ./pftest_alltests
-after_success:
-  - coveralls --root ..
+# after_success:
+#   - coveralls --root ..
