@@ -1,0 +1,9 @@
+language: fortran
+install:
+  - sudo apt-get install gfortran
+script:
+  - mkdir build
+  - cd build
+  - cmake ..
+  - make
+  - ./pftest_alltests
