@@ -1,4 +1,7 @@
 language: fortran
+env:
+    global:
+        - FC=gfortran-4.8
 install:
     # we do this because pfunit compilation fails with gfortran 4.6
   - sudo apt-add-repository --yes ppa:ubuntu-toolchain-r/test
