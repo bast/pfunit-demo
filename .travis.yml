@@ -15,6 +15,5 @@ script:
   - cmake ..
   - make
   - ./pftest_alltests
-  - ls -l /usr/bin/gcov*
 after_success:
-  - coveralls --root .. --extension .F90 -E ".*external.*" -E ".*CMakeFiles.*" -E ".*generated.*" -E ".*test_.*"
+  - coveralls --gcov /usr/bin/gcov-4.9 --root .. --extension .F90 -E ".*external.*" -E ".*CMakeFiles.*" -E ".*generated.*" -E ".*test_.*"
