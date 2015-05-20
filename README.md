@@ -10,4 +10,4 @@ deployed to [Coveralls](https://coveralls.io/r/rbast/pfunit-demo).
 
 - [Build and test history](https://travis-ci.org/rbast/pfunit-demo/builds)
 - [Code coverage](https://coveralls.io/r/rbast/pfunit-demo)
-- Licensed under [LGPLv3](../master/LICENSE)
+- Licensed under [BSD-3](../master/LICENSE)
