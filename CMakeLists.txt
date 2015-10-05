@@ -14,13 +14,6 @@ if(DEFINED PFUNIT_INSTALL)
     message(STATUS "Manual setup of variable PFUNIT_INSTALL: ${PFUNIT_INSTALL}")
     set(PFUNIT_DIR ${PFUNIT_INSTALL})
 else()
-    add_custom_target(
-        git_update
-        COMMAND git submodule init
-        COMMAND git submodule update
-        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
-        )
-
     include(ExternalProject)
 
     file(MAKE_DIRECTORY ${PROJECT_BINARY_DIR}/generated)
@@ -41,7 +34,6 @@ else()
         CMAKE_ARGS ${ExternalProjectCMakeArgs}
         )
     include_directories(${PROJECT_BINARY_DIR}/external/pfunit/mod)
-    add_dependencies(pfunit git_update)
     set(PFUNIT_DIR ${PROJECT_BINARY_DIR}/external/pfunit)
 endif()
 

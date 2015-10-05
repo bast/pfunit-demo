@@ -21,6 +21,7 @@ before_script:
   - export PATH=$HOME/.local/bin:/usr/local/bin:/usr/bin:$PATH
   - if test ${TRAVIS_OS_NAME} = linux; then pip install --upgrade pip cpp-coveralls --user `whoami`; fi
 script:
+  - git submodule update --init --recursive
   - mkdir build
   - cd build
   - if test ${TRAVIS_OS_NAME} = linux; then FC=gfortran-4.9 cmake ..;
