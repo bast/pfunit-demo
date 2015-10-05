@@ -1,7 +1,7 @@
 @test
 subroutine test_subtract_numbers()
 
-   use hello
+   use hello, only: subtract_numbers
    use pfunit_mod
 
    implicit none
