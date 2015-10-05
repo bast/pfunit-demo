@@ -21,7 +21,7 @@ cd pfunit-demo
 mkdir build
 cd build
 cmake ..
-make
+make -j
 make test
 ```
 
