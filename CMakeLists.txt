@@ -16,8 +16,6 @@ if(DEFINED PFUNIT_INSTALL)
 else()
     include(ExternalProject)
 
-    file(MAKE_DIRECTORY ${PROJECT_BINARY_DIR}/generated)
-
     set(ExternalProjectCMakeArgs
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
         -DCMAKE_INSTALL_PREFIX=${PROJECT_BINARY_DIR}/external/pfunit
@@ -37,14 +35,15 @@ else()
     set(PFUNIT_DIR ${PROJECT_BINARY_DIR}/external/pfunit)
 endif()
 
-include_directories(${PFUNIT_DIR}/mod)
+file(MAKE_DIRECTORY ${PROJECT_BINARY_DIR}/generated)
+file(WRITE ${PROJECT_BINARY_DIR}/generated/testSuites.inc "")
 
 include_directories(
     ${PROJECT_SOURCE_DIR}
     ${PROJECT_BINARY_DIR}/generated
+    ${PFUNIT_DIR}/mod
     )
 
-file(WRITE ${PROJECT_BINARY_DIR}/generated/testSuites.inc "")
 set(_test_sources)
 foreach(_test
     test_add_numbers
@@ -71,6 +70,7 @@ add_executable(
     ${PFUNIT_DIR}/include/driver.F90
     ${_test_sources}
     )
+
 target_link_libraries(
     pftest_alltests
     ${PFUNIT_DIR}/lib/libpfunit.a
