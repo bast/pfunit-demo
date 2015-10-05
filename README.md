@@ -13,6 +13,18 @@ deployed to [Coveralls](https://coveralls.io/r/bast/pfunit-demo).
 - Licensed under [BSD-3](../master/LICENSE)
 
 
+## How to build this demo
+
+```
+git clone --recursive https://github.com/bast/pfunit-demo.git
+cd pfunit-demo
+mkdir build
+cd build
+cmake ..
+make
+make test
+```
+
 ## Contributors
 
 - Guillaume Jacquenot (added possibility to use a local install for pFUnit)
