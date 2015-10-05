@@ -11,7 +11,7 @@ endif()
 add_library(demo-sources-to-test hello.F90)
 
 if(DEFINED PFUNIT_INSTALL)
-    message(STATUS "Manual setup of variable PFUNIT_INSTALL : ${PFUNIT_INSTALL}")
+    message(STATUS "Manual setup of variable PFUNIT_INSTALL: ${PFUNIT_INSTALL}")
     set(PFUNIT_DIR ${PFUNIT_INSTALL})
 else()
     add_custom_target(
@@ -58,7 +58,7 @@ foreach(_test
     test_add_numbers
     test_subtract_numbers
     )
-    if (DEFINED PFUNIT_INSTALL)
+    if(DEFINED PFUNIT_INSTALL)
         set(test_dependency ${PROJECT_SOURCE_DIR}/${_test}.F90)
     else()
         set(test_dependency pfunit ${PROJECT_SOURCE_DIR}/${_test}.F90)
