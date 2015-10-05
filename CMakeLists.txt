@@ -4,16 +4,9 @@ project(pfunit-demo)
 
 enable_language(Fortran)
 
-enable_testing()
-
-set(CMAKE_MODULE_PATH
-    ${CMAKE_MODULE_PATH}
-    ${CMAKE_CURRENT_SOURCE_DIR}/cmake
-    )
-
-include(ConfigSafeGuards)
-
-set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -g -fprofile-arcs -ftest-coverage")
+if(CMAKE_Fortran_COMPILER_ID MATCHES GNU)
+    set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -g -fprofile-arcs -ftest-coverage")
+endif()
 
 add_library(demo-sources-to-test hello.F90)
 
@@ -92,4 +85,5 @@ target_link_libraries(
     demo-sources-to-test
     )
 
+enable_testing()
 add_test(pftest_alltests ${PROJECT_BINARY_DIR}/pftest_alltests)
