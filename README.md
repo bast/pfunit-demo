@@ -25,6 +25,11 @@ make -j
 make test
 ```
 
+To get more output when tests fail:
+```
+CTEST_OUTPUT_ON_FAILURE=1 make test
+```
+
 ## Contributors
 
 - Guillaume Jacquenot (added possibility to use a local install for pFUnit)
