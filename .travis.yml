@@ -1,8 +1,11 @@
 sudo: false
+
 language: c
+
 os:
   - linux
   - osx
+
 addons:
   apt:
     sources:
@@ -11,15 +14,18 @@ addons:
       - gcc-4.9
       - gfortran-4.9
       - cmake
+
 before_install:
   - if test ${TRAVIS_OS_NAME} = osx; then brew update; fi
   - if test ${TRAVIS_OS_NAME} = osx; then brew outdated xctool || brew upgrade xctool; fi
   - if test ${TRAVIS_OS_NAME} = osx; then brew unlink gcc; fi
   - if test ${TRAVIS_OS_NAME} = osx; then brew install python gcc; fi
   - if test ${TRAVIS_OS_NAME} = osx; then brew linkapps python; fi
+
 before_script:
   - export PATH=$HOME/.local/bin:/usr/local/bin:/usr/bin:$PATH
   - if test ${TRAVIS_OS_NAME} = linux; then pip install --upgrade pip cpp-coveralls --user `whoami`; fi
+
 script:
   - git submodule update --init --recursive
   - mkdir build
@@ -28,5 +34,9 @@ script:
                                        else FC=gfortran     cmake ..; fi
   - make
   - ./pftest_alltests
+
 after_success:
   - if test ${TRAVIS_OS_NAME} = linux; then coveralls --gcov /usr/bin/gcov-4.9 --root .. --extension .F90 -E ".*external.*" -E ".*CMakeFiles.*" -E ".*generated.*" -E ".*test_.*"; fi
+
+notifications:
+  email: false
