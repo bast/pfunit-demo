@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/bast/pfunit-demo.svg?branch=master)](https://travis-ci.org/bast/pfunit-demo/builds)
 [![Coverage Status](https://coveralls.io/repos/bast/pfunit-demo/badge.png?branch=master)](https://coveralls.io/r/bast/pfunit-demo?branch=master)
+[![License](https://img.shields.io/badge/license-%20BSD--3-blue.svg)](../master/LICENSE)
 
 
 # pfunit-demo
