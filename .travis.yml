@@ -9,15 +9,16 @@ os:
 addons:
   apt:
     sources:
+      - george-edison55-precise-backports
       - ubuntu-toolchain-r-test
     packages:
       - gcc-4.9
       - gfortran-4.9
       - python-virtualenv
+      - cmake
+      - cmake-data
 
 before_install:
-  - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
-  - mkdir -p ${DEPS_DIR} && cd ${DEPS_DIR}
   - |
     if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
       brew update
@@ -25,10 +26,6 @@ before_install:
       brew unlink gcc
       brew install python gcc cmake
       brew linkapps python
-    else
-      CMAKE_URL="http://www.cmake.org/files/v3.6/cmake-3.6.3-Linux-x86_64.tar.gz"
-      mkdir cmake && travis_retry wget --quiet -O - ${CMAKE_URL} | tar --strip-components=1 -xz -C cmake
-      export PATH=${DEPS_DIR}/cmake/bin:${PATH}
     fi
 
 install:
