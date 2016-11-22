@@ -9,25 +9,50 @@ os:
 addons:
   apt:
     sources:
+      - george-edison55-precise-backports  # contains cmake 3.2.3
       - ubuntu-toolchain-r-test
     packages:
       - gcc-4.9
       - gfortran-4.9
+      - python-virtualenv
       - cmake
+      - cmake-data
 
 before_install:
+  - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
+  - mkdir -p ${DEPS_DIR} && cd ${DEPS_DIR}
   - |
     if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
       brew update
       brew outdated xctool || brew upgrade xctool
       brew unlink gcc
-      brew install python gcc
+      brew install python gcc cmake
       brew linkapps python
+    else
+      CMAKE_URL="http://www.cmake.org/files/v3.6/cmake-3.6.3-Linux-x86_64.tar.gz"
+      mkdir cmake && travis_retry wget --quiet -O - ${CMAKE_URL} | tar --strip-components=1 -xz -C cmake
+      export PATH=${DEPS_DIR}/cmake/bin:${PATH}
+    fi
+
+install:
+  - |
+    if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
+      cd ${TRAVIS_BUILD_DIR}
+      virtualenv venv
+      source venv/bin/activate
+    fi
+
+install:
+  - |
+    if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
+      cd ${TRAVIS_BUILD_DIR}
+      virtualenv venv
+      source venv/bin/activate
     fi
 
 before_script:
-  - export PATH=$HOME/.local/bin:/usr/local/bin:/usr/bin:$PATH
-  - if test ${TRAVIS_OS_NAME} = linux; then pip install --upgrade pip cpp-coveralls --user `whoami`; fi
+  - cd ${TRAVIS_BUILD_DIR}
+  - pip install -r requirements.txt
 
 script:
   - git submodule update --init --recursive
