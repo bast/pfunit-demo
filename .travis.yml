@@ -26,8 +26,8 @@ before_install:
     fi
 
 before_script:
-  - export PATH=$HOME/.local/bin:/usr/local/bin:/usr/bin:$PATH
-  - if test ${TRAVIS_OS_NAME} = linux; then pip install --upgrade pip cpp-coveralls --user `whoami`; fi
+  - cd ${TRAVIS_BUILD_DIR}
+  - pip install -r requirements.txt
 
 script:
   - git submodule update --init --recursive
