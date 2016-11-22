@@ -16,11 +16,14 @@ addons:
       - cmake
 
 before_install:
-  - if test ${TRAVIS_OS_NAME} = osx; then brew update; fi
-  - if test ${TRAVIS_OS_NAME} = osx; then brew outdated xctool || brew upgrade xctool; fi
-  - if test ${TRAVIS_OS_NAME} = osx; then brew unlink gcc; fi
-  - if test ${TRAVIS_OS_NAME} = osx; then brew install python gcc; fi
-  - if test ${TRAVIS_OS_NAME} = osx; then brew linkapps python; fi
+  - |
+    if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
+      brew update
+      brew outdated xctool || brew upgrade xctool
+      brew unlink gcc
+      brew install python gcc
+      brew linkapps python
+    fi
 
 before_script:
   - export PATH=$HOME/.local/bin:/usr/local/bin:/usr/bin:$PATH
